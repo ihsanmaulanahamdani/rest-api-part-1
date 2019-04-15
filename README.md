@@ -58,7 +58,7 @@ const app = express();
 
 app.get('/', function(req, res) {
   res
-    .send('Hello World!)
+    .send('Hello World!')
 })
 
 app.listen(port, function() {

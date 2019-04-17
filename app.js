@@ -1,12 +1,67 @@
 const express = require('express')
+const cors = require('cors')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://attandance:abc123@ds143326.mlab.com:43326/attandance-server', { useNewUrlParser: true })
+
+mongoose.set('useFindAndModify', false)
+mongoose.set('useCreateIndex', true)
 
 const port = 3000
 
+const Attandance = require('./model.js')
+
 const app = express()
+const db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'connection error:'))
+db.once('open', function() {
+  console.log('Success connect to database!')
+})
+
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 app.get('/', function(req, res) {
-  res
-    .send('Hello World!')
+  Attandance
+    .find({})
+    .then(data => {
+      res
+        .json({
+          data
+        })
+    })
+    .catch(error => {
+      res
+        .json({
+          error: error.message
+        })
+    })
+})
+
+app.post('/create', function(req, res) {
+  const person = req.body
+
+  Attandance
+    .create({
+      name: person.name,
+      address: person.address,
+      email: person.email,
+      phone: person.phone
+    })
+    .then(data => {
+      res
+        .json({
+          data
+        })
+    })
+    .catch(error => {
+      res
+        .json({
+          error: error.message
+        })
+    })
 })
 
 app.listen(port, function() {

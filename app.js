@@ -64,6 +64,45 @@ app.post('/create', function(req, res) {
     })
 })
 
+app.patch('/update/:id', function(req, res) {
+  const person = req.body
+  const { id } = req.params
+
+  Attandance
+    .findOneAndUpdate({_id: id}, person)
+    .then(data => {
+      res
+        .json({
+          data
+        })
+    })
+    .catch(error => {
+      res
+        .json({
+          error: error.message
+        })
+    })
+})
+
+app.delete('/delete/:id', function(req, res) {
+  const { id } = req.params
+
+  Attandance
+    .findOneAndRemove({_id: id})
+    .then(data => {
+      res
+        .json({
+          data
+        })
+    })
+    .catch(error => {
+      res
+        .json({
+          error: error.message
+        })
+    })
+})
+
 app.listen(port, function() {
   console.log(`Server Ready on http://localhost:${port}`)
 })

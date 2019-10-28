@@ -10,7 +10,7 @@ mongoose.connect('mongodb://attandance:abc123@ds143326.mlab.com:43326/attandance
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 
-const port = 4000
+const port = process.env.PORT || 4000
 
 const Attandance = require('./model.js')
 

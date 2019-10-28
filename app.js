@@ -3,9 +3,9 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 
 // Mlab
-mongoose.connect('mongodb://attandance:abc123@ds143326.mlab.com:43326/attandance-server', { useNewUrlParser: true })
+// mongoose.connect('mongodb://attandance:abc123@ds143326.mlab.com:43326/attandance-server', { useNewUrlParser: true })
 // Mongodb Atlas
-// mongoose.connect('mongodb+srv://needsomesleep:Abc123@cluster0-dovqk.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://ihsan:Abc123@cluster0-qjyit.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
 
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
